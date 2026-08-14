@@ -1,609 +1,126 @@
-CareerGraph
+# CareerGraph
 
-Graph-Powered Career Analysis Application
+### Graph-Powered Career Analysis Application
 
-CareerGraph is a graph-powered career analysis application developed for
-the Wexa AI CognoDB Take-Home Assignment.
+CareerGraph is a graph-based career analysis application developed for the **Wexa AI CognoDB Take-Home Assignment**.
 
-It helps a developer understand how their current skills align with a
-target career role, identify skill gaps, discover recommended
-technologies, and explore the connected career data through an
-interactive graph.
+It helps developers analyze their fit for a target role, identify matched skills, detect skill gaps, discover recommended technologies, and explore career relationships through an interactive graph.
 
-🚀 Live Demo
+---
 
-Frontend:
+## 🚀 Live Demo
+
+**Frontend:**  
 https://careergraph-cognodb.vercel.app/
 
-Backend API:
+**Backend API:**  
 https://careergraph-cognodb-jtn4.onrender.com/
 
-API Developers:
-https://careergraph-cognodb-jtn4.onrender.com/api/developers
+---
 
-API Roles:
-https://careergraph-cognodb-jtn4.onrender.com/api/roles
+## ✨ Key Features
 
-Database Health:
-https://careergraph-cognodb-jtn4.onrender.com/health/db
+- **Career Fit Analysis** — compares a developer's skills with the requirements of a target role.
+- **Matched Skills** — identifies skills already possessed by the developer and required by the selected role.
+- **Skill Gap Detection** — identifies missing skills required for the target role.
+- **Learning Path** — recommends technologies related to missing skills.
+- **Interactive CareerGraph** — visualizes relationships between developers, projects, technologies, skills, roles, and companies.
+- **Error Handling** — includes loading, API failure, empty-state, and database connection handling.
 
-📌 Project Overview
+---
 
-CareerGraph combines a graph database, REST API, and interactive
-frontend to represent relationships between:
+## 🧠 Graph Model
 
-Developers
+The core graph relationships are:
 
-Projects
+Developer → HAS_SKILL → Skill  
+Skill → REQUIRED_FOR → Role  
+Developer → BUILT → Project  
+Project → USES → Technology  
+Technology → RELATED_TO → Skill  
+Role → OFFERED_BY → Company
 
-Technologies
+These relationships power the career-fit analysis, skill-gap detection, learning recommendations, and interactive CareerGraph.
 
-Skills
+---
 
-Roles
+## 🛠️ Technology Stack
 
-Companies
+| Layer | Technology |
+|---|---|
+| Frontend | React, Vite, JavaScript, CSS |
+| Graph Visualization | React Flow, Dagre |
+| Backend | Python, FastAPI, Uvicorn |
+| Database | CognoDB |
+| Query Language | Cypher / openCypher |
+| Deployment | Vercel + Render |
 
-The application follows a simple workflow:
+---
 
-Developer + Target Role → Career Fit → Matched Skills + Skill Gaps →
-Recommended Technologies → CareerGraph
+## 📄 Project Documentation
 
-The graph structure makes relationship-driven career analysis natural to
-query and visualize.
+The complete technical documentation is available in the project repository:
 
-✨ Key Features
+[CareerGraph Project Documentation](docs/CareerGraph_Project_Documentation.pdf)
 
-1. Career Fit Analysis
+The documentation covers the architecture, detailed graph model, technology stack, important Cypher queries, API endpoints, setup instructions, and error handling.
 
-A user selects:
+---
 
-Current developer profile
+## 🎥 Demo Video
 
-Target career role
+[Watch the CareerGraph Demo](PASTE_SCREEN_RECORDING_LINK_HERE)
 
-The application analyzes the relationship between the developer's
-existing skills and the skills required by the selected role.
+The demonstration covers the hosted application, career-fit analysis, matched skills, skill gaps, learning path, and interactive CareerGraph.
 
-2. Matched Skills
+---
 
-Skills already possessed by the selected developer and required by the
-target role are identified as matching skills.
+## ⚙️ Local Setup
 
-3. Skill Gap Detection
+### Backend
 
-The application identifies role-required skills that are not currently
-associated with the selected developer.
+Install the backend dependencies:
 
-These gaps provide the basis for the recommended learning path.
+    pip install -r backend/requirements.txt
 
-4. Recommended Technologies
+Run the backend from the project root:
 
-For identified skill gaps, CareerGraph follows technology-to-skill
-relationships to recommend relevant technologies.
+    uvicorn backend.main:app --reload
 
-Examples represented in the project include:
+### Frontend
 
-Data Analysis → Python / PostgreSQL
+Install the frontend dependencies:
 
-Data Structures & Algorithms → Python / JavaScript
+    cd frontend
+    npm install
 
-Machine Learning → Python
+Run the frontend:
 
-Frontend Development → React
+    npm run dev
 
-REST API Development → FastAPI
+Create a `.env` file in the project root with your CognoDB credentials:
 
-5. Interactive CareerGraph
+    COGNODB_URI=your_cognodb_uri
+    COGNODB_USERNAME=your_cognodb_username
+    COGNODB_PASSWORD=your_cognodb_password
 
-The graph visualization connects:
+---
 
-Developer → Project → Technology → Skill → Role → Company
+## 🔐 Security
 
-The graph interface supports:
+Database credentials are stored using environment variables and are not committed to GitHub.
 
-Zoom
+---
 
-Pan
+## 👨‍💻 Author
 
-Fit-to-view
+**Abhishant Kumar**
 
-Node dragging
+Mail: **veerusonic.com**
 
-Relationship labels
-
-Automatic graph layout
-
-Responsive graph rendering
-
-6. Error and Loading States
-
-The application handles:
-
-API loading
-
-API connection failures
-
-Empty graph responses
-
-Missing skill information
-
-Invalid or incomplete selections
-
-🧠 Why a Graph Database?
-
-CareerGraph is primarily a relationship-driven problem.
-
-The important information is not only the individual entities but also
-how those entities are connected.
-
-For example:
-
-Developer ──HAS_SKILL──> Skill
-Developer ──BUILT──────> Project ──USES──> Technology
-Technology ──RELATED_TO─> Skill
-Skill ──REQUIRED_FOR───> Role
-Role ──OFFERED_BY──────> Company
-
-These relationships can require multiple traversals to answer questions
-such as:
-
-Which skills does this developer already have for the selected role,
-which skills are missing, and which technologies could help close
-those gaps?
-
-A graph database represents these relationships directly as graph edges,
-making traversal-based queries natural and extensible.
-
-🗃️ Graph Data Model
-
-Node Types
-
-Node         Purpose
-
-Developer    Represents a developer profile
-Project      Represents a project built by a developer
-Technology   Represents a programming technology or tool
-Skill        Represents a career skill
-Role         Represents a target career role
-Company      Represents a company offering a role
-
-Relationships
-
-Relationship     Meaning
-
-HAS_SKILL      Developer possesses a skill
-BUILT          Developer built a project
-USES           Project uses a technology
-RELATED_TO     Technology is related to a skill
-REQUIRED_FOR   Skill is required for a role
-OFFERED_BY     Role is offered by a company
-
-Graph Model
-
-                         ┌──────────────┐
-                         │   Company    │
-                         └──────▲───────┘
-                                │ OFFERED_BY
-                         ┌──────┴───────┐
-                         │     Role     │
-                         └──────┬───────┘
-                                │ REQUIRED_FOR
-                                ▼
-                         ┌──────────────┐
-                         │    Skill     │
-                         └──────▲───────┘
-                                │ RELATED_TO
-                                │
-                         ┌──────┴───────┐
-                         │ Technology   │
-                         └──────▲───────┘
-                                │ USES
-                         ┌──────┴───────┐
-                         │   Project    │
-                         └──────▲───────┘
-                                │ BUILT
-                         ┌──────┴───────┐
-                         │  Developer   │
-                         └──────────────┘
-
-The actual application renders this connected model as an interactive
-CareerGraph.
-
-🏗️ Architecture
-
-┌─────────────────────────────────────────────┐
-│                  React UI                   │
-│                                             │
-│ Developer / Role Selection                  │
-│ Career Fit • Skill Gaps • Learning Path     │
-│ Interactive CareerGraph                     │
-└──────────────────────┬──────────────────────┘
-                       │ HTTP / JSON
-                       ▼
-┌─────────────────────────────────────────────┐
-│                 FastAPI                     │
-│                                             │
-│ API Routes                                  │
-│ Career Queries                              │
-│ Graph Transformation                        │
-│ Error Handling                              │
-└──────────────────────┬──────────────────────┘
-                       │ Bolt / Cypher
-                       ▼
-┌─────────────────────────────────────────────┐
-│                  CognoDB                    │
-│                                             │
-│ Developer • Project • Technology            │
-│ Skill • Role • Company                      │
-└─────────────────────────────────────────────┘
-
-🛠️ Technology Stack
-
-Layer                   Technology / Library    Purpose
-
-Frontend                React                   User interface and
-application flow
-
-Frontend                Vite                    Development and
-production build
-tooling
-
-Frontend                JavaScript              Application logic and
-UI interactions
-
-Frontend                React Flow              Interactive graph
-(@xyflow/react)       visualization
-
-Frontend                Dagre                   Automatic graph layout
-(@dagrejs/dagre)
-
-Frontend                CSS                     Styling and responsive
-presentation
-
-Backend                 Python                  Backend programming
-language
-
-Backend                 FastAPI                 REST API framework
-
-Backend                 Uvicorn                 ASGI server
-
-Backend                 python-dotenv           Environment
-configuration
-
-Backend                 Neo4j Python Driver     Graph database
-connectivity
-
-Database                CognoDB                 Connected graph data
-storage
-
-Database                Cypher / openCypher     Graph querying
-
-Database                Bolt                    Database connection
-protocol
-
-Hosting                 Vercel                  Frontend deployment
-
-Hosting                 Render                  Backend API deployment
-
-🔌 API Endpoints
-
-Area              Method            Endpoint                                        Description
-
-Developers        GET               /api/developers                               Returns available
-developer
-profiles
-
-Roles             GET               /api/roles                                    Returns available
-target roles
-
-Career Fit        GET               /api/career-fit/{developer_id}/{role_id}      Calculates career
-fit
-
-Learning Path     GET               /api/learning-path/{developer_id}/{role_id}   Returns missing
-skills and
-recommended
-technologies
-
-🔍 Important Graph Query Logic
-
-Career Fit
-
-The career-fit analysis compares the developer's existing skills against
-the skills required by the selected role.
-
-Conceptually:
-
-Developer ──HAS_SKILL──> Skill <──REQUIRED_FOR── Role
-
-The backend uses this relationship to identify matched and missing
-skills.
-
-Learning Path
-
-The learning-path logic follows:
-
-Role ──REQUIRED_FOR──> Missing Skill <──RELATED_TO── Technology
-
-This allows the API to return:
-
-Missing skill
-
-Skill category
-
-Recommended technologies
-
-CareerGraph
-
-The CareerGraph combines multiple connected paths:
-
-Developer → Skill → Role
-Developer → Project → Technology → Skill
-Role → Company
-
-The backend converts the graph result into nodes and edges consumed by
-React Flow.
-
-📁 Project Structure
-
-WEXA_COGNODB_ASSIGNMENT/
-│
-├── backend/
-│   ├── __init__.py
-│   ├── database.py
-│   ├── main.py
-│   ├── seed.py
-│   ├── setup_schema.py
-│   ├── test_connection.py
-│   ├── test_learning.py
-│   ├── test_role_relationships.py
-│   ├── requirements.txt
-│   ├── cypher/
-│   │   └── schema.cypher
-│   └── queries/
-│       └── career_queries.py
-│
-├── frontend/
-│   ├── src/
-│   │   ├── App.jsx
-│   │   ├── App.css
-│   │   ├── GraphView.jsx
-│   │   ├── index.css
-│   │   └── main.jsx
-│   ├── public/
-│   ├── package.json
-│   └── vite.config.js
-│
-├── docs/
-│   └── CareerGraph_Project_Documentation.pdf
-│
-├── .env.example
-├── .gitignore
-├── README.md
-└── test_connection.py
-
-⚙️ Local Setup
-
-Prerequisites
-
-Make sure the following are installed:
-
-Python 3.12+
-
-Node.js
-
-npm
-
-Git
-
-CognoDB access
-
-1. Clone the Repository
-
-git clone https://github.com/Abhi4knk18/careergraph-cognodb.git
-cd careergraph-cognodb
-
-2. Backend Setup
-
-Create and activate a virtual environment:
-
-Windows
-
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-
-Install backend dependencies:
-
-pip install -r backend\requirements.txt
-
-3. Configure CognoDB
-
-Create a .env file in the project root:
-
-COGNODB_URI=your_cognodb_uri
-COGNODB_USERNAME=your_cognodb_username
-COGNODB_PASSWORD=your_cognodb_password
-
-Never commit the real .env file.
-
-The repository contains .env.example as the safe configuration
-template.
-
-4. Seed the Database
-
-python backend\seed.py
-
-The seed data creates the connected career entities used by the
-application.
-
-5. Run the Backend
-
-From the project root:
-
-uvicorn backend.main:app --reload
-
-The local API will be available at:
-
-http://127.0.0.1:8000
-
-6. Run the Frontend
-
-Open another terminal:
-
-cd frontend
-npm install
-npm run dev
-
-Vite will provide the local frontend URL.
-
-🧪 Verification
-
-The backend can be verified using:
-
-GET /health
-
-and:
-
-GET /health/db
-
-A successful database health response confirms that the API is connected
-to CognoDB.
-
-Example:
-
-{
-  "status": "healthy",
-  "database": "CognoDB",
-  "connection": "successful"
-}
-
-The following APIs can also be checked directly:
-
-/api/developers
-/api/roles
-
-🚀 Production Deployment
-
-Backend
-
-The FastAPI backend is deployed on Render.
-
-Production start command:
-
-uvicorn backend.main:app --host 0.0.0.0 --port $PORT
-
-Production API:
-
-https://careergraph-cognodb-jtn4.onrender.com/
-
-Frontend
-
-The React/Vite frontend is deployed on Vercel.
-
-Production API configuration uses:
-
-VITE_API_URL=https://careergraph-cognodb-jtn4.onrender.com
-
-Production frontend:
-
-https://careergraph-cognodb.vercel.app/
-
- Environment Variables
-
-Backend
-
-COGNODB_URI
-COGNODB_USERNAME
-COGNODB_PASSWORD
-
-Frontend
-
-VITE_API_URL
-
-Secrets and credentials are intentionally excluded from version control
-through .gitignore.
-
- Error Handling
-
-Frontend
-
-The frontend handles:
-
-API loading
-
-API connection errors
-
-Empty graph results
-
-Missing skill data
-
-Invalid selections
-
-Backend
-
-The backend validates required CognoDB environment variables before
-creating the database driver.
-
-This prevents the application from silently starting with an invalid
-database configuration.
-
- CareerGraph Workflow
-
-                Select Developer
-                       │
-                       ▼
-                 Select Role
-                       │
-                       ▼
-               Analyze Career Fit
-                       │
-          ┌────────────┴────────────┐
-          ▼                         ▼
-    Matched Skills             Skill Gaps
-                                    │
-                                    ▼
-                         Recommended Technologies
-                                    │
-                                    ▼
-                           Interactive CareerGraph
-
-📄 Detailed Documentation
-
-A complete project documentation PDF is included in the repository:
-
-docs/CareerGraph_Project_Documentation.pdf
-
-It contains detailed information about:
-
-Project overview
-
-Technology stack
-
-Architecture
-
-Graph data model
-
-Node types
-
-Relationships
-
-Important Cypher logic
-
-API endpoints
-
-Setup instructions
-
-Environment configuration
-
-Error handling
-
-Project summary
-
- Author
-
-Abhishant Kumar
-
-Mail: veerusonic.com
-
-GitHub:
+GitHub:  
 https://github.com/Abhi4knk18
+
+---
+
+### Wexa AI CognoDB Take-Home Assignment
