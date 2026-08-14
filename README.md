@@ -59,8 +59,9 @@ These relationships power the career-fit analysis, skill-gap detection, learning
 
 ## 📄 Project Documentation
 
-[CareerGraph Project Documentation](https://drive.google.com/file/d/1jsnYuaPt1adBgvlyOWRB-dYAcQBdJqKn/view?usp=drive_link)
+📘 [View CareerGraph Project Documentation](https://drive.google.com/file/d/1jsnYuaPt1adBgvlyOWRB-dYAcQBdJqKn/view?usp=drive_link)
 
+---
 ## 🎥 Demo Video
 
 [Watch the CareerGraph Demo](PASTE_SCREEN_RECORDING_LINK_HERE)
