@@ -59,13 +59,7 @@ These relationships power the career-fit analysis, skill-gap detection, learning
 
 ## 📄 Project Documentation
 
-The complete technical documentation is available in the project repository:
-
-[CareerGraph Project Documentation](docs/CareerGraph_Project_Documentation.pdf)
-
-The documentation covers the architecture, detailed graph model, technology stack, important Cypher queries, API endpoints, setup instructions, and error handling.
-
----
+[CareerGraph Project Documentation](https://drive.google.com/file/d/1jsnYuaPt1adBgvlyOWRB-dYAcQBdJqKn/view?usp=drive_link)
 
 ## 🎥 Demo Video
 
