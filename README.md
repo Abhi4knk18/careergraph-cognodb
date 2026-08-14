@@ -64,10 +64,7 @@ These relationships power the career-fit analysis, skill-gap detection, learning
 ---
 ## 🎥 Demo Video
 
-[Watch the CareerGraph Demo](PASTE_SCREEN_RECORDING_LINK_HERE)
-
-The demonstration covers the hosted application, career-fit analysis, matched skills, skill gaps, learning path, and interactive CareerGraph.
-
+[Watch the CareerGraph Demo](https://drive.google.com/file/d/1sXSrn1En6sZABWb3ysE2iWLqHl-Yw7rs/view?usp=drive_link)
 ---
 
 ## ⚙️ Local Setup
